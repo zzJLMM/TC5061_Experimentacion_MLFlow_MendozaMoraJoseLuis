@@ -1,0 +1,15 @@
+pandas==3.0.6
+scikit-learn==1.9.1
+matplotlib==3.11.2
+seaborn==0.13.2
+mlflow==3.16.1
+loguru
+python-dotenv
+tqdm
+typer
+mkdocs
+ruff
+ipython
+jupyterlab
+notebook
+-e .
