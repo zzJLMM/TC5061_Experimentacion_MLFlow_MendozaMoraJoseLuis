@@ -41,7 +41,10 @@ BODY = (
 
 COMMAND = (
     "Comando de la mejor corrida:\n"
-    ".venv\\Scripts\\python -m src.train --C 10"
+    ".venv\\Scripts\\python -m src.train --C 10\n\n"
+    "Repositorio:\n"
+    "https://github.com/zzJLMM/"
+    "TC5061_Experimentacion_MLFlow_MendozaMoraJoseLuis"
 )
 
 
