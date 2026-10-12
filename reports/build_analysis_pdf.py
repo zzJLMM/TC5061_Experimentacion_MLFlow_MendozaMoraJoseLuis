@@ -12,6 +12,10 @@ FIGURE = (
     / "confusion_matrix_c10.0_ngram1_balanced.png"
 )
 OUTPUT = ROOT / "reports" / "TC5061_Experimentacion_MLFlow_MendozaMoraJoseLuis.pdf"
+LOGO = ROOT / "reports" / "images" / "logo_tec.png"
+HEADER = ROOT / "reports" / "images" / "portada_curso.png"
+RUNS_TABLE = ROOT / "reports" / "images" / "mlflow_tabla.png"
+RUN_DETAIL = ROOT / "reports" / "images" / "mlflow_corrida.png"
 ARIAL = Path(r"C:\Windows\Fonts\arial.ttf")
 ARIAL_BOLD = Path(r"C:\Windows\Fonts\arialbd.ttf")
 
@@ -56,8 +60,9 @@ class Report(FPDF):
 
 
 def write_paragraph(pdf: FPDF, text: str) -> None:
+    pdf.set_x(pdf.l_margin)
     pdf.set_font("Arial", size=11)
-    pdf.multi_cell(0, 5.8, text)
+    pdf.multi_cell(0, 5.8, text, new_x="LMARGIN", new_y="NEXT")
     pdf.ln(2)
 
 
@@ -69,11 +74,38 @@ def main() -> None:
     pdf.set_margins(25, 22, 25)
     pdf.add_page()
 
+    pdf.set_font("Arial", "B", size=16)
+    pdf.multi_cell(
+        0,
+        8,
+        "Operaciones de aprendizaje automático",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.ln(3)
+    pdf.set_font("Arial", size=12)
+    pdf.multi_cell(
+        0,
+        7,
+        "Prof. Dr. Iván Reyes-Amezcua",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.multi_cell(
+        0,
+        7,
+        "A01732182 - Ing. Jose Luis Mendoza Mora",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.ln(4)
     pdf.set_font("Arial", "B", size=14)
     pdf.multi_cell(
         0,
         8,
-        "TC5061 Experimentacion con MLflow\nMendoza Mora Jose Luis",
+        "TC5061 Experimentacion con MLflow",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
     pdf.ln(4)
     pdf.set_font("Arial", size=11)
@@ -103,7 +135,41 @@ def main() -> None:
             pdf.cell(width, 7, value, border=1)
         pdf.ln()
 
-    pdf.ln(6)
+    pdf.add_page()
+    pdf.set_font("Arial", "B", size=12)
+    pdf.cell(
+        0,
+        8,
+        "Tabla comparativa en MLflow",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.image(str(RUNS_TABLE), w=pdf.epw)
+    pdf.ln(4)
+    pdf.set_font("Arial", size=11)
+    write_paragraph(
+        pdf,
+        "Cinco corridas del experimento TC5061 SMS Spam Hiperparametros.",
+    )
+
+    pdf.add_page()
+    pdf.set_font("Arial", "B", size=12)
+    pdf.cell(
+        0,
+        8,
+        "Detalle de la corrida auspicious-shark-466",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.image(str(RUN_DETAIL), w=pdf.epw)
+    pdf.ln(4)
+    pdf.set_font("Arial", size=11)
+    write_paragraph(
+        pdf,
+        "Corrida Finished. Metricas de prueba y modelo sms_spam_model.",
+    )
+
+    pdf.add_page()
     pdf.set_font("Arial", "B", size=12)
     pdf.cell(
         0,
